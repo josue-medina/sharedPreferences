@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">SharedPreferences</string>
+    <string name="title_text"> This is a example </string>
+    <integer name="keyforinteger"> 1000 </integer>
+</resources>
