@@ -1,5 +1,6 @@
 package com.example.sharedpreferences
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -28,28 +29,30 @@ class MainActivity : AppCompatActivity() {
         switchTHREE.isChecked = resources.getBoolean(R.bool.boolean_key3)
         switchFOUR.isChecked = resources.getBoolean(R.bool.boolean_key4)
 
+        //PARTE DE LA CLASE 09/11
+        val sharedPref = getPreferences(Context.MODE_PRIVATE)
+        if (sharedPref != null) {
+            val success =
+                sharedPref.edit().putInt(getString(R.integer.saved_high_score_key), 20).commit()
+
+            if (success) {
+                val newHighScore = sharedPref.getInt(getString(R.integer.saved_high_score_key), 21)
+                Log.d("SAVEDVALUES", "AFTER BEGIN COMMITED ${newHighScore}")
+            }
 
 
+        }
 
+        //otro sobreescrito
+        sharedPref.edit().putString(getString(R.string.title_text), "SOBREESCRITO").commit()
+        Log.d(
+            "SAVEDVALUES",
+            "new title ${sharedPref.getString(getString(R.string.title_text), "")}"
+        )
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        //
+        sharedPref.edit().putString("un_string_random", "preba_de_que_pasara").commit()
+        Log.d("SAVEDVALUES", "EXPERIMENTO: ${sharedPref.getString("CAMBIOS","")}")
 
     }
 }
